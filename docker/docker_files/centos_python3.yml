@@ -1,0 +1,29 @@
+# Docker file for a CentOS-based Python3 image
+# https://linuxize.com/post/how-to-install-python-3-on-centos-7/
+
+FROM centos:7
+
+
+RUN yum install centos-release-scl -y
+
+RUN yum install rh-python36 -y
+
+RUN scl enable rh-python36 bash
+
+RUN yum groupinstall 'Development Tools' -y
+
+RUN mkdir -p /opt/base/scalable_crawler
+
+WORKDIR /opt/base
+
+RUN /opt/rh/rh-python36/root/usr/bin/python3.6 -m venv venv
+
+#RUN curl -O https://bootstrap.pypa.io/get-pip.py && /opt/rh/rh-python36/root/usr/bin/python3.6 get-pip.py
+
+RUN source venv/bin/activate && python -V
+
+
+
+
+
+

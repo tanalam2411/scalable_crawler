@@ -1,0 +1,17 @@
+version: '2.2'
+
+services:
+  crawler_app:
+    build:
+      context: .
+      dockerfile: ./docker/docker_files/centos_python3.yml
+
+    volumes:
+      - ./webapp:/opt/base/scalable_crawler/webapp
+
+    ports:
+      - "8888:8888"
+    command: >
+
+      bash -c "cd /opt/base/ source venv/bin/activate && cd /opt/base/scalable_crawler/webapp
+      && /opt/base/venv/bin/pip3 install -r requirements.txt && /opt/base/venv/bin/python3.6 app.py"
